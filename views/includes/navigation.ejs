@@ -1,0 +1,24 @@
+<div class="ui teal large menu">
+    <a class="<%=activePage === '/' ? 'active' : ''%> item" href="/">
+      Home
+    </a>
+    <a class="<%=activePage === '/recipes' ? 'active' : ''%> item" href="/recipes">
+      Recipes
+    </a>
+    <a class="<%=activePage === '/shopping-list' ? 'active' : ''%> item" href="/shopping-list">
+      Shopping List
+    </a>
+  
+    <div class="right menu">
+        <a class="item" href="/recipes/add">
+            <div class="ui teal basic button">Add Recipe</div>
+          </a>
+      <div class="item">
+        <div class="ui transparent icon input">
+          <input type="text" placeholder="Search...">
+          <i class="search link icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  
