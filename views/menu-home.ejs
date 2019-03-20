@@ -1,12 +1,13 @@
 <%- include('includes/head.ejs')%> <%- include('includes/navigation.ejs')%>
 
+<h1 class="ui huge center aligned header"><%= menu.name %></h1>
+
 <div class="ui container">
-  <h1 class="ui huge center aligned header">The family menu</h1>
 
   <!-- Repeat for every menu day -->
 
   <!-- <div> -->
-  <h5 class="ui horizontal divider header">21st April 2019</h5>
+  <h5 class="ui horizontal divider header"><%= menu.startDate %></h5>
 
   <div class="ui four column grid">
     <div class="row">
@@ -15,11 +16,11 @@
           <div class="content">
             <img
               class="left floated tiny bordered ui image"
-              src="http://2.bp.blogspot.com/-R-_uefQj57c/VYfsv1XAVwI/AAAAAAAAAy8/VzFhmcAjo8U/s1600/do_the_funky_chicken-1548136.jpg"
+              src="<%= (typeof menu.meals[0].morningRecipeId === 'undefined') ? '' : menu.meals[0].morningRecipeId.imagePath %>""
             />
-            <div class="header">Raspberry bircher</div>
+            <div class="header"><%= (typeof menu.meals[0].morningRecipeId === 'undefined') ? '' : menu.meals[0].morningRecipeId.name %></div>
             <div class="meta">2 portions</div>
-            <div class="description">Fran's lovely morning bircher</div>
+            <div class="description"><%= (typeof menu.meals[0].morningRecipeId === 'undefined') ? menu.meals[0].morningText : menu.meals[0].morningRecipeId.description %></div>
           </div>
         </div>
       </div>
@@ -28,11 +29,11 @@
           <div class="content">
             <img
               class="left floated tiny bordered ui image"
-              src="http://2.bp.blogspot.com/-R-_uefQj57c/VYfsv1XAVwI/AAAAAAAAAy8/VzFhmcAjo8U/s1600/do_the_funky_chicken-1548136.jpg"
+              src="<%= (typeof menu.meals[0].lunchRecipeId === 'undefined') ? '' : menu.meals[0].lunchRecipeId.imagePath %>""
             />
-            <div class="header">Lunch</div>
+            <div class="header"><%= (typeof menu.meals[0].lunchRecipeId === 'undefined') ? '' : menu.meals[0].lunchRecipeId.name %></div>
             <div class="meta">2 portions</div>
-            <div class="description">A silly recipe example</div>
+            <div class="description"><%= (typeof menu.meals[0].lunchRecipeId === 'undefined') ? menu.meals[0].lunchText : menu.meals[0].lunchRecipeId.description %></div>
           </div>
         </div>
       </div>
@@ -41,11 +42,11 @@
           <div class="content">
             <img
               class="left floated tiny bordered ui image"
-              src="http://2.bp.blogspot.com/-R-_uefQj57c/VYfsv1XAVwI/AAAAAAAAAy8/VzFhmcAjo8U/s1600/do_the_funky_chicken-1548136.jpg"
+              src="<%= (typeof menu.meals[0].dinnerRecipeId === 'undefined') ? '' : menu.meals[0].dinnerRecipeId.imagePath %>""
             />
-            <div class="header">Dinner</div>
+            <div class="header"><%= (typeof menu.meals[0].dinnerRecipeId === 'undefined') ? '' : menu.meals[0].dinnerRecipeId.name %></div>
             <div class="meta">2 portions</div>
-            <div class="description">A silly recipe example</div>
+            <div class="description"><%= (typeof menu.meals[0].dinnerRecipeId === 'undefined') ? menu.meals[0].dinnerText : menu.meals[0].dinnerRecipeId.description %></div>
           </div>
         </div>
       </div>

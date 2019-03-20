@@ -1,0 +1,69 @@
+<%-include('includes/head.ejs')%> <%-include('includes/navigation.ejs')%>
+
+<div class="ui container">
+  <div class="ui raised segment">
+    <form class="ui form" action="/dayMenu" method="POST">
+      <div class="field">
+        <label>dayMenu Date</label>
+        <input
+          type="date"
+          name="startDate"
+          placeholder="E.g. 21/04/2018"
+        />
+      </div>
+      <div class="field">
+        <label>Breakfast recipeID</label>
+        <input
+          type="text"
+          name="morningRecipeId"
+          placeholder="1a2b3c4d5e6f"
+        />
+      </div>
+      <div class="field">
+        <label>Breakfast text</label>
+        <input
+          type="text"
+          name="morningText"
+          placeholder="Some notes regarding breakfast"
+        />
+      </div>
+      <div class="field">
+        <label>Lunch recipeID</label>
+        <input
+          type="text"
+          name="lunchRecipeId"
+          placeholder="1a2b3c4d5e6f"
+        />
+      </div>
+      <div class="field">
+        <label>Lunch text</label>
+        <input
+          type="text"
+          name="lunchText"
+          placeholder="Some notes regarding lunch"
+        />
+      </div>
+      <div class="field">
+        <label>Dinner recipeID</label>
+        <input
+          type="text"
+          name="dinnerRecipeId"
+          placeholder="1a2b3c4d5e6f"
+        />
+      </div>
+      <div class="field">
+        <label>Dinner text</label>
+        <input
+          type="text"
+          name="dinnerText"
+          placeholder="Some notes regarding dinner"
+        />
+      </div>
+
+      <button class="ui teal button" type="submit">Add dayMenu</button>
+      <!-- <button class="ui button">Clear</button> -->
+    </form>
+  </div>
+</div>
+
+<%-include('includes/end.ejs')%>

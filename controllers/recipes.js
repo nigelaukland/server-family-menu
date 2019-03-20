@@ -1,9 +1,6 @@
 // Require the fs module for file IO, and path for OS-agnostic paths
 const Recipe = require('./../models/recipe');
 
-const fs = require('fs');
-const path = require('path');
-
 exports.addRecipe = (req, res, next) => {
   res.status(200).render("recipe-add", {
     pageTitle: "Family Menu : Add a new recipe",
@@ -12,20 +9,25 @@ exports.addRecipe = (req, res, next) => {
 };
 
 exports.getRecipes = (req, res, next) => {
-  Recipe.getAllRecipes(recipesData => {
+  Recipe.find()
+  .then(recipesData => {
     res.status(200).render("recipes", {
       pageTitle: "Family Menu : Your recipes",
       activePage: "/recipes",
       recipes: recipesData
     });
+  })
+  .catch(err => {
+    console.log(err);
   });
 };
 
 exports.postAddRecipe = (req, res, next) => {
   const name = req.body.name;
   const description = req.body.description;
-  const imagePath = req.body.imagePath;
-  const recipe = new Recipe(name, description, imagePath);
-  recipe.addRecipe();
+  // if imagePath is an empty string then set it to undefined to ensure that mongoose applies the default
+  const imagePath = (req.body.imagePath == '') ? undefined : req.body.imagePath;
+  const recipe = new Recipe({name: name, description: description, imagePath: imagePath});
+  recipe.save();
   res.redirect('/');
-}
+};

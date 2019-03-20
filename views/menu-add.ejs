@@ -1,0 +1,24 @@
+<%-include('includes/head.ejs')%> <%-include('includes/navigation.ejs')%>
+
+<div class="ui container">
+  <div class="ui raised segment">
+    <form class="ui form" action="/menu" method="POST">
+      <div class="field">
+        <label>Menu Name</label>
+        <input type="text" name="name" placeholder="E.g. Tuesday 21st April" />
+      </div>
+      <div class="field">
+        <label>Start Date</label>
+        <input
+          type="date"
+          name="startDate"
+          placeholder="E.g. 21/04/2018"
+        />
+      </div>
+      <button class="ui teal button" type="submit">Get Planning!</button>
+      <!-- <button class="ui button">Clear</button> -->
+    </form>
+  </div>
+</div>
+
+<%-include('includes/end.ejs')%>

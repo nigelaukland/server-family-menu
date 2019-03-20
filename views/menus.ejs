@@ -1,0 +1,28 @@
+<%-include('includes/head.ejs')%> <%-include('includes/navigation.ejs')%>
+<h1 class="ui huge center aligned header">Menus</h1>
+
+<div class="ui container">
+  <div class="ui very relaxed divided list">
+    <% for(var i = 0; i < menus.length; i++) {%>
+    <div class="item">
+      <div class="right floated content">
+        <!-- <div class="ui button">Edit</div> -->
+        <a href="/menu/edit/<%= menus[i]._id %>" class="ui button">Edit</a>
+        <a href="/menu/delete/<%= menus[i]._id %>" class="ui button">Remove</a>
+      </div>
+      <i class="large calendar middle aligned icon"></i>
+      <div class="content">
+        <a class="header">
+          <%= menus[i].name %></a>
+        <div class="description">
+          <%= menus[i].startDate %></div>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<!-- <h1 class="ui huge center aligned header">Placeholder for the menus page</h1>
+<h1 class="ui huge center aligned header"><%= JSON.stringify(menus) %></h1> -->
+
+<%-include('includes/end.ejs')%>

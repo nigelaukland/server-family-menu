@@ -2,6 +2,9 @@
     <a class="<%=activePage === '/' ? 'active' : ''%> item" href="/">
       Home
     </a>
+    <a class="<%=activePage === '/menus' ? 'active' : ''%> item" href="/menus">
+      Menus
+    </a>
     <a class="<%=activePage === '/recipes' ? 'active' : ''%> item" href="/recipes">
       Recipes
     </a>
@@ -10,15 +13,24 @@
     </a>
   
     <div class="right menu">
-        <a class="item" href="/recipes/add">
+      <a class="item" href="/menus/add">
+        <div class="ui teal basic button">Add Menu</div>
+      </a>
+      <a class="item" href="/recipes/add">
             <div class="ui teal basic button">Add Recipe</div>
           </a>
+      <a class="item" href="/dayMenus/add">
+        <div class="ui teal basic button">Add dayMenu</div>
+      </a>
       <div class="item">
         <div class="ui transparent icon input">
           <input type="text" placeholder="Search...">
           <i class="search link icon"></i>
         </div>
       </div>
+      <a class="<%= activePage === '/login' ? 'active' : ''%> item" href="/login">
+        Login
+      </a>
     </div>
   </div>
   

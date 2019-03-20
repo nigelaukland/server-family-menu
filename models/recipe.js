@@ -1,37 +1,23 @@
-const fs = require('fs');
-const path = require('path');
+const mongoose = require('mongoose');
 
-const p = path.join(
-  path.dirname(process.mainModule.filename),
-  'data',
-  'recipes.json'
-);
+// Schema is the class
+const Schema = mongoose.Schema;
 
-const getRecipesFromFile = cb => {
-  fs.readFile(p, (err, data) => {
-    if (err) {
-      cb([]);
-    } else {
-      cb(JSON.parse(data));
-    }    
+// instantiate a new object of class Schema
+const recipeSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: false
+  },
+  imagePath: {
+    type: String,
+    required: false,
+    default: 'https://cdn.pixabay.com/photo/2014/12/21/23/28/recipe-575434_1280.png'
+    }
   });
-};
 
-module.exports = class Recipe {
-
-  constructor(name, description, imagePath) {
-    this.name = name;
-    this.description = description;
-    this.imagePath = imagePath;  
-  }
-
-  addRecipe() {
-      fs.writeFileSync(p, JSON.stringify(this), (err) => {
-      console.log(err);
-    });
-  }
-
-  static getAllRecipes(cb) {
-    getRecipesFromFile(cb);
-  }
-}
+module.exports = mongoose.model('Recipe', recipeSchema);
