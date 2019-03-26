@@ -1,12 +1,11 @@
 <%-include('includes/head.ejs')%> <%-include('includes/navigation.ejs')%>
 
 <div class="ui container">
-  <div class="ui raised text container segment"">
-    <form class="ui form" action="/login" method="POST">
-    <!-- <form class="ui form" action="/" method="GET"> -->
+  <div class="ui raised text container segment">
+    <form class="ui form" action="/signup" method="POST">
       <div class="field">
         <label>Email address</label>
-        <input type="text" name="email" />
+        <input type="email" name="email" />
       </div>
       <div class="field">
         <label>Password</label>
@@ -15,8 +14,15 @@
           name="password"
         />
       </div>
-      <button class="ui teal button" type="submit">Login</button>
-      <!-- <button class="ui button">Clear</button> -->
+      <div class="field">
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          name="confirmPassword"
+        />
+      </div>
+
+      <button class="ui teal button" type="submit">Signup</button>
     </form>
   </div>
 </div>

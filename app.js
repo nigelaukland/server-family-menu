@@ -3,10 +3,15 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require("mongoose");
 const app = express();
+const store = new MongoDBStore({
+  uri: 'mongodb://localhost:27017/family-menu',
+  collection: 'sessions'
+});
 
-// database
+// database connections using mongo
 // const mongoConnect = require("./utils/database").mongoConnect;
 // const dbConnect = require("./utils/database").dbConnect;
 
@@ -25,7 +30,12 @@ app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
-  session({ secret: "whitey2020", resave: false, saveUninitialized: false })
+  session({ 
+    secret: "whitey2020", 
+    resave: false, 
+    saveUninitialized: false,
+    store: store
+   })
 );
 
 // Register the routes
