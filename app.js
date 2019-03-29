@@ -41,7 +41,15 @@ app.use(
     store: store
    })
 );
+
 app.use(csrfProtection);
+
+// add middleware that defines local variables for each and every view
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.session.isAuthenticated;
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
 
 // Register the routes
 app.use(menuRoutes);

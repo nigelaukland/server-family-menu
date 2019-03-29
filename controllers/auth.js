@@ -5,8 +5,7 @@ exports.getLogin = (req, res, next) => {
   res.status(200).render("login", {
     pageTitle: "Login",
     activePage: "/login",
-    isAuthenticated: req.session.isAuthenticated,
-    csrfToken: req.csrfToken()
+    isAuthenticated: req.session.isAuthenticated
   });
 };
 
@@ -38,9 +37,7 @@ exports.postLogin = (req, res, next) => {
 exports.getSignUp = (req, res, next) => {
   res.status(200).render("signup", {
     pageTitle: "Signup",
-    activePage: "/signup",
-    isAuthenticated: req.session.isAuthenticated,
-    csrfToken: req.csrfToken()
+    activePage: "/signup"
   });
 };
 
@@ -69,7 +66,6 @@ exports.postSignUp = (req, res, next) => {
 };
 
 exports.postLogout = (req, res, next) => {
-  req.session.isAuthenticated = false;
   return req.session.destroy(() => {
     console.log(`User logged out`);
     res.redirect("/");

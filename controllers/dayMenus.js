@@ -4,9 +4,7 @@ const DayMenu = require('./../models/dayMenu');
 exports.addDayMenu = (req, res, next) => {
   res.status(200).render("dayMenu-add", {
     pageTitle: "Family Menu : Add a new day menu",
-    activePage: "/dayMenus",
-    isAuthenticated: req.session.isAuthenticated,
-    csrfToken: req.csrfToken()
+    activePage: "/dayMenus"
   });
 };
 
