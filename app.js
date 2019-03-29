@@ -11,6 +11,7 @@ const store = new MongoDBStore({
   collection: 'sessions'
 });
 const csrf = require('csurf');
+const flash = require('connect-flash');
 
 // database connections using mongo
 // const mongoConnect = require("./utils/database").mongoConnect;
@@ -42,6 +43,10 @@ app.use(
    })
 );
 
+// add flash middleware to pass transient messages to views
+app.use(flash());
+
+// add CSRF check middleware
 app.use(csrfProtection);
 
 // add middleware that defines local variables for each and every view

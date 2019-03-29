@@ -1,11 +1,23 @@
 <%-include('includes/head.ejs')%> <%-include('includes/navigation.ejs')%>
 
 <div class="ui container">
-  <div class="ui raised text container segment">
+  <div class="ui text container segment">
     <form class="ui form" action="/signup" method="POST">
+      <% if (error) { %>
+        <div class="ui negative message">
+          <p><%= error %>
+          </p>
+        </div>
+      <% } %>
+      <% if (message) { %>
+        <div class="ui positive message">
+          <p><%= message %>
+          </p>
+        </div>
+      <% } %>
       <div class="field">
         <label>Email address</label>
-        <input type="email" name="email" />
+        <input type="email" name="email" value='<%= email %>' />
       </div>
       <div class="field">
         <label>Password</label>
