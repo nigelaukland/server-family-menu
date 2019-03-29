@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const Menu = require('./../models/menu');
 
 exports.getCurrentMenu = (req, res, next) => {
-  // Menu.findById('5c92beda9717c13a00c612b0')
-    // .populate('meals')
     Menu.findOne()
     .populate({
       path: 'meals',
@@ -15,7 +13,9 @@ exports.getCurrentMenu = (req, res, next) => {
       res.status(200).render('menu-home', {
         pageTitle : "Welcome to family menu",
         activePage : "/",
-        menu: menuData
+        menu: menuData,
+        isAuthenticated: req.session.isAuthenticated,
+        csrfToken: req.csrfToken()
       });
     })
     .catch(err => {
@@ -26,7 +26,9 @@ exports.getCurrentMenu = (req, res, next) => {
 exports.addMenu = (req, res, next) => {
   res.status(200).render('menu-add', {
     pageTitle : "Add a new menu",
-    activePage : "/menus"
+    activePage : "/menus",
+    isAuthenticated: req.session.isAuthenticated,
+    csrfToken: req.csrfToken()
   })
 };
 
@@ -36,7 +38,9 @@ exports.getMenus = (req, res, next) => {
       res.status(200).render("menus", {
         pageTitle: "Family Menu : Your menus",
         activePage: "/menus",
-        menus: menusData
+        menus: menusData,
+        isAuthenticated: req.session.isAuthenticated,
+        csrfToken: req.csrfToken()
       });
     })
     .catch(err => {
@@ -67,7 +71,9 @@ exports.getEditMenu = (req, res, next) => {
       res.status(200).render('menu-edit', {
       pageTitle : "Edit menu",
       activePage : "/menus",
-      menu: menu
+      menu: menu,
+      isAuthenticated: req.session.isAuthenticated,
+      csrfToken: req.csrfToken()
     });
   })
 };

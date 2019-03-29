@@ -28,12 +28,21 @@
           <i class="search link icon"></i>
         </div>
       </div>
+      <% if (!isAuthenticated) { %>
       <a class="<%= activePage === '/login' ? 'active' : ''%> item" href="/login">
         Login
       </a>
       <a class="<%= activePage === '/signup' ? 'active' : ''%> item" href="/signup">
         Signup
       </a>
+      <% } else { %>
+      <a class="<%= activePage === '/login' ? 'active' : ''%> item">
+        <form action="/logout" method="post">
+          <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+          <button class="ui teal basic button" type="submit">Logout</button>
+        </form>
+      </a>
+      <% } %>  
     </div>
   </div>
   

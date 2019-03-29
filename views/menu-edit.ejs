@@ -36,6 +36,7 @@
         />
       </div>
       <input type="hidden" value="<%= menu._id %>" name="_id">
+      <input type="hidden" name="_csrf" value=<%= csrfToken %>>
       <button class="ui teal button" type="submit">Update</button>
       <a href="/menu/deleteMenu/" class="ui basic teal button">Delete</a>
     </form>

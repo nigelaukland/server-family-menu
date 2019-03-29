@@ -4,7 +4,9 @@ const Recipe = require('./../models/recipe');
 exports.addRecipe = (req, res, next) => {
   res.status(200).render("recipe-add", {
     pageTitle: "Family Menu : Add a new recipe",
-    activePage: "/recipes"
+    activePage: "/recipes",
+    isAuthenticated: req.session.isAuthenticated,
+    csrfToken: req.csrfToken()
   });
 };
 
@@ -14,7 +16,9 @@ exports.getRecipes = (req, res, next) => {
     res.status(200).render("recipes", {
       pageTitle: "Family Menu : Your recipes",
       activePage: "/recipes",
-      recipes: recipesData
+      recipes: recipesData,
+      isAuthenticated: req.session.isAuthenticated,
+      csrfToken: req.csrfToken()
     });
   })
   .catch(err => {

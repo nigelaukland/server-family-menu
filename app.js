@@ -10,6 +10,7 @@ const store = new MongoDBStore({
   uri: 'mongodb://localhost:27017/family-menu',
   collection: 'sessions'
 });
+const csrf = require('csurf');
 
 // database connections using mongo
 // const mongoConnect = require("./utils/database").mongoConnect;
@@ -21,6 +22,9 @@ const dayMenuRoutes = require("./routes/dayMenu");
 const recipeRoutes = require("./routes/recipe");
 const authRoutes = require("./routes/auth");
 const errorRoutes = require("./routes/error");
+
+// configure csrf protection
+const csrfProtection = csrf();
 
 // set express variables
 app.set("view engine", "ejs");
@@ -37,6 +41,7 @@ app.use(
     store: store
    })
 );
+app.use(csrfProtection);
 
 // Register the routes
 app.use(menuRoutes);
