@@ -3,18 +3,7 @@
 <div class="ui container">
   <div class="ui text container segment">
     <form class="ui form" action="/signup" method="POST">
-      <% if (error) { %>
-        <div class="ui negative message">
-          <p><%= error %>
-          </p>
-        </div>
-      <% } %>
-      <% if (message) { %>
-        <div class="ui positive message">
-          <p><%= message %>
-          </p>
-        </div>
-      <% } %>
+      <%-include('includes/messages.ejs')%>
       <div class="field">
         <label>Email address</label>
         <input type="email" name="email" value='<%= email %>' />
