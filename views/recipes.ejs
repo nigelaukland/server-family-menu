@@ -1,6 +1,25 @@
 <%-include('includes/head.ejs')%> <%-include('includes/navigation.ejs')%>
+<h1 class="ui huge center aligned header">Recipes</h1>
 
-<h1 class="ui huge center aligned header">Placeholder for the recipes page</h1>
-<h1 class="ui huge center aligned header"><%= JSON.stringify(recipes) %></h1>
+<div class="ui container">
+  <div class="ui very relaxed divided list">
+    <% for(var i = 0; i < recipes.length; i++) {%>
+    <div class="item">
+      <div class="right floated content">
+        <!-- <div class="ui button">Edit</div> -->
+        <a href="/recipe/edit/<%= recipes[i]._id %>" class="ui button">Edit</a>
+        <a href="/recipe/delete/<%= recipes[i]._id %>" class="ui button">Remove</a>
+      </div>
+      <img class="ui tiny image" src="<%= recipes[i].imagePath %>">
+      <div class="content">
+        <a class="header">
+          <%= recipes[i].name %></a>
+        <div class="description">
+          <%= recipes[i].description %></div>
+        </div>
+    </div>
+    <% } %>
+  </div>
+</div>
 
 <%-include('includes/end.ejs')%>

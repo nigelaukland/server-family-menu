@@ -1,4 +1,4 @@
-// Require the fs module for file IO, and path for OS-agnostic paths
+// Load the recipe model
 const Recipe = require("./../models/recipe");
 
 exports.addRecipe = (req, res, next) => {
@@ -25,13 +25,30 @@ exports.getRecipes = (req, res, next) => {
 exports.postAddRecipe = (req, res, next) => {
   const name = req.body.name;
   const description = req.body.description;
-  // if imagePath is an empty string then set it to undefined to ensure that mongoose applies the default
-  const imagePath = req.body.imagePath == "" ? undefined : req.body.imagePath;
+  const image = req.file;
+  console.log(req.file);
+  const imagePath = image.path;
+  const tinyImagePath = req.body.tinyImagePath;
+  const mediumImagePath = req.body.mediumImagePath;
   const recipe = new Recipe({
     name: name,
     description: description,
-    imagePath: imagePath
+    imagePath: `/${imagePath}`,
+    tinyImagePath: `/${tinyImagePath}`,
+    mediumImagePath: `/${mediumImagePath}`
   });
   recipe.save();
   res.redirect("/");
+};
+
+exports.postDeleteRecipe = (req, res, next) => {
+  const recipeId = req.params.recipeId;
+  Recipe.findByIdAndDelete(recipeId)
+    .then(res => {
+      console.log(`Deleted recipe ${recipeId}`);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  res.redirect("/recipes");
 };

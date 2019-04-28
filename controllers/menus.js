@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Menu = require("./../models/menu");
+const DayMenu = require("./../models/dayMenu");
 
 exports.getCurrentMenu = (req, res, next) => {
   Menu.findOne()
@@ -45,16 +46,29 @@ exports.getMenus = (req, res, next) => {
 exports.postAddMenu = (req, res, next) => {
   const name = req.body.name;
   const startDate = req.body.startDate;
-  const meals = []; // initialise empty array of meals
-  const menu = new Menu({ name: name, startDate: startDate, meals: meals });
-  menu
-    .save()
-    .then(res => {
-      console.log(`Saved menu ${name}`);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+
+  // create a default empty dayMenu for the start of the menu
+  const dayMenu = new DayMenu({ startDate: startDate });
+  
+  // save the default dayMenu and then save the menu
+  dayMenu
+  .save()
+  .then(doc => {
+    console.log(`Saved default dayMenu for ${startDate}`);
+
+    // now save the menu with the default dayMenu
+    const meals = [ dayMenu._id ]; 
+    const menu = new Menu({ name: name, startDate: startDate, meals: meals });
+    menu
+      .save()
+      .then(res => {
+        console.log(`Saved menu ${name}`);
+      });
+  })
+  .catch(err => {
+    console.log(err)
+  });
+
   res.redirect("/");
 };
 

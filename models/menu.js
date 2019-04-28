@@ -13,7 +13,6 @@ const menuSchema = new Schema({
     type: Date,
     required: true,
   },
-  // meals: [{dayMenuId: {type: Schema.Types.ObjectId, ref: 'dayMenu'}}],
   meals: [{ 
     type: Schema.Types.ObjectId, 
     ref: 'DayMenu', 
