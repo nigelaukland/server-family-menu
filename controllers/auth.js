@@ -2,7 +2,7 @@ const User = require('./../models/user');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 
-const config = require('./../config.js');
+const config = require('../config.js');
 
 ///////////////// setup email
 
@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 });
 
 let mailOptions = {
-  from: 'nigelaukland@gmail.com', // sender address
+  from: config.email.fromAddress, // sender address
   to: '', // list of receiver(s)
   subject: 'Welcome to Family Menu', // Subject line
   html: '<p>Your html here</p>'// plain text body

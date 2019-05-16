@@ -27,6 +27,10 @@ const recipeSchema = new Schema({
     type: String,
     required: false,
     default: 'https://cdn.pixabay.com/photo/2014/12/21/23/28/recipe-575434_1280.png'
+    },
+  ingredientsList: {
+      type: [{}],
+      required: false
     }
   });
 

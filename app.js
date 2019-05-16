@@ -1,3 +1,6 @@
+// project variables
+const config = require('./config.js');
+
 // express built in
 const path = require("path");
 const express = require("express");
@@ -8,10 +11,7 @@ const session = require("express-session");
 const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require("mongoose");
 const app = express();
-const store = new MongoDBStore({
-  uri: 'mongodb://localhost:27017/family-menu',
-  collection: 'sessions'
-});
+const store = new MongoDBStore(config.session.sessionStore);
 const csrf = require('csurf');
 const flash = require('connect-flash'); 
 
@@ -28,7 +28,7 @@ const csrfProtection = csrf();
 // configure file storage for multer
 const multerStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'images/')
+    cb(null, config.IMAGE_STORAGE_DIR)
   },
   filename: function (req, file, cb) {
     cb(null, `${Date.now()}-${file.originalname}`)
@@ -42,13 +42,12 @@ app.set("views", "views");
 // Set up express middlewares
 /// file serving
 app.use(express.static(path.join(__dirname, "public")));
-app.use('/images', express.static(path.join(__dirname, "images")));
+app.use(`/${config.IMAGE_STORAGE_DIR}`, express.static(path.join(__dirname, config.IMAGE_STORAGE_DIR)));
 
 /// request parsing
 app.use(bodyParser.urlencoded({ extended: true }));
 
 /// deal with image upload and processing on sepcific routes
-//app.post("/recipe", multer({ storage: multerStorage }).single('imagePath'));
 app.post("/recipe", multer({ storage: multerStorage }).single('imagePath'), (req, res, next) => { 
   
   // add the filenames to the body
@@ -84,7 +83,7 @@ app.post("/recipe", multer({ storage: multerStorage }).single('imagePath'), (req
 /// sessions
 app.use(
   session({ 
-    secret: "whitey2020", 
+    secret: config.session.sessionSecret, 
     resave: false, 
     saveUninitialized: false,
     store: store
@@ -112,9 +111,9 @@ app.use(authRoutes);
 app.use(errorRoutes);
 
 mongoose
-  .connect('mongodb://localhost:27017/family-menu')
+  .connect(config.database.uri)
   .then(result => {
-    app.listen(3000);
+    app.listen(config.app.port);
   })
   .catch(err => {
     console.log(err);

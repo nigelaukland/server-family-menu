@@ -8,7 +8,6 @@
 
   <!-- <div> -->
   <h5 class="ui horizontal divider header"><%= menu.startDate %></h5>
-
   <div class="ui four column grid">
     <div class="row">
       <div class="column">
@@ -27,13 +26,22 @@
       <div class="column">
         <div class="ui card">
           <div class="content">
-            <img
+              <% if (typeof menu.meals[0].lunchRecipeId !== 'undefined') { %>
+              <img
               class="left floated tiny bordered ui image"
-              src="<%= (typeof menu.meals[0].lunchRecipeId === 'undefined') ? '' : menu.meals[0].lunchRecipeId.imagePath %>""
-            />
-            <div class="header"><%= (typeof menu.meals[0].lunchRecipeId === 'undefined') ? '' : menu.meals[0].lunchRecipeId.name %></div>
-            <div class="meta">2 portions</div>
-            <div class="description"><%= (typeof menu.meals[0].lunchRecipeId === 'undefined') ? menu.meals[0].lunchText : menu.meals[0].lunchRecipeId.description %></div>
+              src="<%= menu.meals[0].lunchRecipeId.imagePath %>"
+              />
+              <div class="header"><%= menu.meals[0].lunchRecipeId.name %></div>
+              <div class="meta"></div>
+              <div class="description"><%= menu.meals[0].lunchRecipeId.description %></div>
+              <% } %>
+
+            <button title="Add meal" class="ui right floated icon basic button">
+                <i class="calendar plus outline icon"></i>
+            </button>
+            <button title="Add note" class="ui right floated icon basic button">
+                <i class="pencil icon"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -52,6 +60,15 @@
       </div>
       <div class="column">Notes</div>
     </div>
+  </div>
+</div>
+
+<!-- Modal window -->
+
+<div class="ui modal">
+  <div class="header">Choose recipe</div>
+  <div class="scrolling content">
+    <p>Very long content goes here</p>
   </div>
 </div>
 

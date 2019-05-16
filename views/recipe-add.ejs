@@ -5,24 +5,26 @@
     <form class="ui form" action="/recipe" method="POST" enctype="multipart/form-data">
       <div class="field">
         <label>Name of recipe</label>
-        <input type="text" name="name" placeholder="E.g. Tandoori tilapia" />
+        <input type="text" name="name" placeholder="E.g. Pancakes" />
       </div>
       <div class="field">
         <label>Description</label>
         <input
           type="text"
           name="description"
-          placeholder="E.g. A take on James Martin's Tandoori Cod"
+          placeholder="E.g. Fran's tasty Sunday pancakes"
         />
       </div>
-      <!-- <div class="field">
-        <label>Image Path</label>
-        <input
-          type="text"
-          name="imagePath"
-          placeholder="E.g. /www.example.com/images/food.jpg"
-        />
-      </div> -->
+      <div class="field">
+        <label>Ingredients</label>
+        <textarea
+          name="ingredients"
+          placeholder="e.g.
+4 eggs
+200g flour
+100ml milk"
+        ></textarea>
+      </div>
       <div class="field">
         <label>Image</label>
         <input

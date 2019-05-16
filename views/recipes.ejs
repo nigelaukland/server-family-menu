@@ -6,9 +6,14 @@
     <% for(var i = 0; i < recipes.length; i++) {%>
     <div class="item">
       <div class="right floated content">
+        <input type="hidden" name="_csrf" value='<%= csrfToken %>'>
+        <input type="hidden" name="recipeId" value='<%= recipes[i]._id %>'>
         <!-- <div class="ui button">Edit</div> -->
         <a href="/recipe/edit/<%= recipes[i]._id %>" class="ui button">Edit</a>
-        <a href="/recipe/delete/<%= recipes[i]._id %>" class="ui button">Remove</a>
+        <!-- <a href="/recipe/delete/<%= recipes[i]._id %>" class="ui button">Remove</a> -->
+        <!-- <a id='delete-<%= recipes[i]._id %>' class="ui button deleteRecipe">Delete</a> -->
+        <a class="ui button deleteRecipe">Delete</a>
+
       </div>
       <img class="ui tiny image" src="<%= recipes[i].imagePath %>">
       <div class="content">
